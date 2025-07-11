@@ -1,0 +1,21 @@
+name: flutter_shop_app
+description: A simple Flutter mobile shop app.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '^3.8.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^0.13.6
+  cached_network_image: ^3.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
