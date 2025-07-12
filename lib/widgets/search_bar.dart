@@ -8,16 +8,16 @@ class SearchBar extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search for products',
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: 'Search for products',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(24),
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
                 fillColor: Colors.grey[100],
-                prefixIcon: Icon(Icons.search),
+          prefixIcon: Icon(Icons.search),
                 contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
               ),
             ),
@@ -36,7 +36,7 @@ class SearchBar extends StatelessWidget {
                 // TODO: Implement camera action
               },
             ),
-          ),
+        ),
         ],
       ),
     );

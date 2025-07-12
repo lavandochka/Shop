@@ -25,7 +25,8 @@ class ApiService {
       url += '&category_id=$categoryId';
     }
     final res = await http.get(Uri.parse(url));
-    final List data = jsonDecode(res.body);
-    return data.map((json) => Product.fromJson(json)).toList();
+    final data = jsonDecode(res.body);
+    final List results = data['results'];
+  return results.map((json) => Product.fromJson(json)).toList();
   }
 }
