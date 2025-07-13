@@ -7,6 +7,7 @@ import '../widgets/product_grid.dart';
 import '../widgets/search_bar.dart' as custom;
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'product_details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -120,67 +121,76 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: bestSellingProducts.length,
                   itemBuilder: (context, index) {
                     final product = bestSellingProducts[index];
-                    return Container(
-                      width: 180,
-                      margin: EdgeInsets.only(left: index == 0 ? 16 : 8, right: 8, bottom: 8),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: [BoxShadow(blurRadius: 5, color: Colors.black12)],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-                                child: Image.network(
-                                  product.image,
-                                  height: 140,
-                                  width: 180,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Positioned(
-                                top: 8,
-                                right: 8,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => ProductDetailsScreen(product: product),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 180,
+                        margin: EdgeInsets.only(left: index == 0 ? 16 : 8, right: 8, bottom: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [BoxShadow(blurRadius: 5, color: Colors.black12)],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                                  child: Image.network(
+                                    product.image,
+                                    height: 140,
+                                    width: 180,
+                                    fit: BoxFit.cover,
                                   ),
-                                  child: Icon(Icons.star_border, size: 24),
                                 ),
+                                Positioned(
+                                  top: 8,
+                                  right: 8,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Icon(Icons.star_border, size: 24),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              child: Text(
+                                product.name,
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                            child: Text(
-                              product.name,
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(
-                              product.subtitle ?? '',
-                              style: TextStyle(color: Colors.grey, fontSize: 14),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 12),
+                              child: Text(
+                                product.subtitle ?? '',
+                                style: TextStyle(color: Colors.grey, fontSize: 14),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                            child: Text(
-                              ' 24${product.price.toStringAsFixed(0)}',
-                              style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 16),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                              child: Text(
+                                ' 24${product.price.toStringAsFixed(0)}',
+                                style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   },
